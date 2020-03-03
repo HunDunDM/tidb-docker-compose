@@ -123,7 +123,7 @@ But edit these files manually is tedious and error-prone, a template engine is s
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 ```
 
-Or if you use Mac, you can use homebrew to install Helm by `brew install kubernetes-helm`
+Or if you use Mac, you can use homebrew to install Helm by `brew install helm`
 
 ### Bring up TiDB cluster
 

@@ -3,6 +3,7 @@
 {{- $pdPort := .Values.pd.port | int }}
 {{- $pdPeerPort := add $pdPort 10000 }}
 {{- $tikvPort := .Values.tikv.port | int -}}
+{{- $tikvStatusPort := add $tikvPort 10000 }}
 {{- $pumpSize := .Values.pump.size | int }}
 {{- $pumpPort := .Values.pump.port | int }}
 {{- $zooSize := .Values.zookeeper.size | int }}
@@ -78,9 +79,11 @@ services:
     command:
       {{- if eq $.Values.networkMode "host" }}
       - --addr=0.0.0.0:{{ add $tikvPort . }}
+      - --status-addr=0.0.0.0:{{ add $tikvStatusPort . }}
       - --advertise-addr=127.0.0.1:{{ add $tikvPort . }}
       {{- else }}
       - --addr=0.0.0.0:20160
+      - --status-addr=0.0.0.0:20180
       - --advertise-addr=tikv{{ . }}:20160
       {{- end }}
       - --data-dir=/data/tikv{{ . }}
@@ -354,6 +357,7 @@ services:
   {{- end }}
 
   {{- if .Values.prometheus }}
+  # monitors
   pushgateway:
     image: {{ .Values.pushgateway.image }}
     {{- if eq .Values.networkMode "host" }}
