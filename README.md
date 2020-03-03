@@ -119,11 +119,16 @@ But edit these files manually is tedious and error-prone, a template engine is s
 
 [Helm](https://helm.sh) is used as a template render engine
 
-```
+```bash
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 ```
 
-Or if you use Mac, you can use homebrew to install Helm by `brew install helm`
+Or if you use Mac, you can use homebrew to install Helm by
+
+```bash
+brew install helm@2
+brew link helm@2 --force
+```
 
 ### Bring up TiDB cluster
 
